@@ -17,3 +17,7 @@ fastapi, jinja2, sqlalchemy, mariadb, docker, docker-compose, aws, langchain, ap
     - http://127.0.0.1:8000/ooooo -> 쿼리스트링 (get 방식)
     - http://127.0.0.1:8000/member?id=abc1234&name=cherry -> member에 ? 뒤 값을 전달 & == AND
     - 숨겨야하는 정보들 (post 방식)
+
+## 카카오 나에게 톡 보내기
+- 인증코드 URL(Base) : https://kauth.kakao.com/oauth/authorize?client_id={REST API 키}&redirect_uri={Redirect URI}&response_type=code&scope=talk_message
+- 인증코드 URL(Mine) : https://kauth.kakao.com/oauth/authorize?client_id=8e27c9db50b3a186482c7c863fc8040b&redirect_uri=http://127.0.0.1:8000&response_type=code&scope=talk_message
