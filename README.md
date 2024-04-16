@@ -21,3 +21,21 @@ fastapi, jinja2, sqlalchemy, mariadb, docker, docker-compose, aws, langchain, ap
 ## 카카오 나에게 톡 보내기
 - 인증코드 URL(Base) : https://kauth.kakao.com/oauth/authorize?client_id={REST API 키}&redirect_uri={Redirect URI}&response_type=code&scope=talk_message
 - 인증코드 URL(Mine) : https://kauth.kakao.com/oauth/authorize?client_id=8e27c9db50b3a186482c7c863fc8040b&redirect_uri=http://127.0.0.1:8000&response_type=code&scope=talk_message
+
+
+#### 1. 카카오 API 용어
+- 인증코드: 1회성, 토큰(Access, Refresh) 발급 받기 위해 사용!
+- Access 토큰: 카카오 API 서비스를 이용할 때 사용
+- Refresh 토큰: Access 토큰을 재발급 받기 위해 사용
+- 생명주기: 인증코드(1회), Access(6시간), Refresh(2달)
+- *Refresh 토큰은 발급받고 1달 후 부터 재발급 가능
+- Access와 Refresh 재발급 받는 코드는 동일
+- └ 재발급 코드: Refresh 발급받은지 1달 미만, Access 토큰만 재발급해서 리턴
+- └ 재발급 코드: Refresh 발급받은지 1달 이상, Access 토큰과 Refresh 토큰 재발급해서 리턴
+
+#### 2. 카카오 API 사용 방법
+1. kakao Developer 사이트에서 "권한 허용 및 동의"
+2. 웹 브라우저 URL을 통해 인증 코드 발급
+3. 인증코드 사용해서 토큰(Access, Refresh) 발급
+4. Access 사용해서 서비스 이용!
+5. +1달에 한번씩 Refresh 토큰 재발급 스케줄링
