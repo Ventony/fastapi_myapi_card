@@ -1,6 +1,9 @@
 # fastapi_myapi_card
 fastapi, jinja2, sqlalchemy, mariadb, docker, docker-compose, aws, langchain, apscheduler, uvicorn, requests
 
+# pip command
+＞ pip install -r requirements.txt -> requirements.txt에 있는 pip 전부 설치
+＞ pip freeze > requirements.txt -> 현재 설치되어있는 pip 전부를 requirements.txt에 표시
 
 # 라이브러리 설명
 1. fastapi: 웹 프레임워크 + API
@@ -17,6 +20,26 @@ fastapi, jinja2, sqlalchemy, mariadb, docker, docker-compose, aws, langchain, ap
     - http://127.0.0.1:8000/ooooo -> 쿼리스트링 (get 방식)
     - http://127.0.0.1:8000/member?id=abc1234&name=cherry -> member에 ? 뒤 값을 전달 & == AND
     - 숨겨야하는 정보들 (post 방식)
+
+#### 2. DAO and DTO(VO)
+    - DAO(Data Access Object): CRUD (Create, Read, Update, Delete) 할 때 사용
+       + Create: INSERT
+       + Read:   SELETE
+       + Update: UPDATE
+       + Delete: DELETE
+
+    - DTO(Data Transfer Object): 데이터를 전달할 때 사용
+    
+#### 3. 유효성(Validation) 체크
+  - 유효성체크는 사용자의 값이 올바른 값인지 체크
+     + 예: 이메일(이메일 형식인지?)
+  - 역사
+    1. 유효성체크: 서버 -> 과부하
+    2.            클라이언트(웹브라우저) -> JS (현재도 사용중)
+    3.            서버 추가 -> 더블 체크(pydantic)
+    
+  -
+
 
 ## 카카오 나에게 톡 보내기
 - 인증코드 URL(Base) : https://kauth.kakao.com/oauth/authorize?client_id={REST API 키}&redirect_uri={Redirect URI}&response_type=code&scope=talk_message
@@ -39,3 +62,17 @@ fastapi, jinja2, sqlalchemy, mariadb, docker, docker-compose, aws, langchain, ap
 3. 인증코드 사용해서 토큰(Access, Refresh) 발급
 4. Access 사용해서 서비스 이용!
 5. +1달에 한번씩 Refresh 토큰 재발급 스케줄링
+
+### #. 각종 이야기
+- 원래 js는 정적인 동작 (static) -> 서버를 타지 않고 클라이언트에서 작동
+- 동적인 동작 (Dynamic) -> node.js  탄생으로 동적 js가 가능해짐
+
+1. Spring (JAVA)
+2. Node (JS)
+3. Django, flask, fastapi (PYTHON)
+
+- 전자정부 프레임워크 -> 정부에서 만든 프레임 워크 (정부 관련 사업 진행시 사용하는 툴)
+- -> Spring (JAVA)를 기반으로 만듬
+- -> 웹 개발 프로그래머가 될려면 Spring을 배워라
+
+- css는 head에 짜고 js는 body 끝나고 짬 -> HTML은 하향식 구조이기 때문에 중간에 에러나면 출력이 안됨

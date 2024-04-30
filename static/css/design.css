@@ -182,7 +182,7 @@
 .window_title span{
 	line-height: 3.5rem;
 }
-.window_title > div {
+.w_title > div {
 	display: flex;
 	align-items: center;
 	gap: 3px;

@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', path= '/css/common.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', path= '/css/design.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', path= '/css/animation.css')}}">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', path='/img/favicon.ico')}}">
 </head>
 <body>
     <div class="top_btn fix_btn"><i class="fas fa-arrow-up"></i></div>
@@ -34,17 +36,18 @@
         <div class="kakao_box">
             <div class="msg_box" id="kakao_msg_box">
                 <div class="kakao_msg_info">연락을 원하시면 언제든지 메세지를 보내주세요.</div>
+                <!-- form 태그 = 사용자에게 내용을 받는 구역-->
                 <form id="kakao_form">
                     <div class="kakao_input_area">
-                        <div class="kakao_input_box">
+                        <div class="kakao_input_box"> <!-- 이름 내용을 받음 -->
                             <input type="text" name="kakao_name" class="kakao_input" id="kakao_name">
                             <label for="kakao_name" class="kakao_input_label">NAME</label>
                         </div>
-                        <div class="kakao_input_box">
+                        <div class="kakao_input_box"> <!-- 이메일 내용을 받음 -->
                             <input type="text" name="kakao_email" class="kakao_input" id="kakao_email">
                             <label for="kakao_email" class="kakao_input_label">EMAIL</label>
                         </div>
-                        <div class="kakao_input_box">
+                        <div class="kakao_input_box"> <!-- 메세지 보낼 내용을 받음 -->
                             <input type="text" name="kakao_message" class="kakao_input" id="kakao_message">
                             <label for="kakao_message" class="kakao_input_label">MESSAGE</label>
                         </div>
@@ -100,7 +103,7 @@
                 <a class="sns_btn" href="" target="_blank"><i class="fab fa-google"></i></a>
                 <a class="sns_btn" href="https://www.instagram.com/_ventony" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a class="sns_btn" href="https://www.youtube.com/channel/UCprc9MGevKd0gXBbZxnJMeA" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a class="sns_btn" href="./download/resume.pdf" download="resume.pdf"><i class="fas fa-file-download"></i></a>
+                <a class="sns_btn" href="./download/resume.pdf" download="Yeo_In_Hyeop.pdf"><i class="fas fa-file-download"></i></a>
             </div>
         </div>
         
@@ -135,7 +138,7 @@
                         <span>+ </span>
                     </div>
                     <div>
-                        <span>자격증1</span>
+                        <span>정보처리산업기사</span>
                         <span>자격증2</span>
                         <span>자격증3</span>
                     </div>
@@ -168,8 +171,8 @@
                         <span>+ </span>
                     </div>
                     <div>
-                        <span>조선이공대학교 컴퓨터보안과 졸업</span>
-                        <span>조선대학교 컴퓨터공학과 재학</span>
+                        <span>2021 조선이공대학교 컴퓨터보안과 전문학사 취득</span>
+                        <span>2025 조선대학교 컴퓨터공학과 학사 취득 예정</span>
                     </div>
                 </div>
             </div>
