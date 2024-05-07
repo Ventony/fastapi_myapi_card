@@ -21,16 +21,16 @@ data = {
     "grant_type": "authorization_code",
     "client_id": "8e27c9db50b3a186482c7c863fc8040b",    #RESTAPI KEY
     "redirect_uri": "http://127.0.0.1:8000",
-    "code": "_ADnSeq6jmVMCA-cnWp1pvpo75SuMnBDqnAVuO-LD_OycIX-31A8EWTWoxoKPXRoAAABjuT4YqIe0jm_MNo9Pw"
-}
-
-# 토큰 발급 코드
+    "code": "dqeqrFvr4svsMVSt-zZGS6cPHYymYEIxhnSmo74N96WLmugFAVXaEAhLr7EKPXNOAAABj1ERNb2i-KZYUq23DA"
+    }
+# 최초 토큰 발급 받기
 #response = requests.post(url, data= data)
 #tokens = response.json()
 #print(tokens)
 
 #토큰 발급 이후 acess_token 작성
 
+# 3. 토큰 이용해서 나에게 톡 보내기
 access_token = "4J0_Qj3uvNkV1wzS3DRldnGrF_8mf1ltEgUKPXQRAAABjuT4mpSt1856Xp2T3g"
 msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
 headers = {
