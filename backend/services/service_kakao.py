@@ -61,7 +61,7 @@ class KakaoService:
         # 2. refresh_token 발급받고 1달 이후
         #   response (new access_token, new refresh_token 발급)
 
-        # tokens -> kakao_code.json (이전에 사용한 토큰)
+        # tokens → kakao_code.json (이전에 사용한 토큰)
         if new_tokens.get("refresh_token"): # refresh_token도 재발급 된 경우
             tokens["refresh_token"] = new_tokens.get("refresh_token")
 
@@ -79,15 +79,35 @@ class KakaoService:
         
         # 1. 토큰 유무 체크
         if os.path.isfile("./kakao_code.json"):
-            # ./kakao_code.json -> Access_token, Refresh_token 저장
+            # ./kakao_code.json → Access_token, Refresh_token 저장
             # 동작: kakao_code.json 파일이 존재하면
             #       refresh_token을 사용해서 Access_token을 재발급 받으세요
             #       이유: Access_token(4시간만 사용 가능)
-            # 토큰이 있는 경우 -> Refresh Token을 활용해서 재발급
+            # 토큰이 있는 경우 → Refresh Token을 활용해서 재발급
             tokens = self.refresh_access_token()
         else:
-            # 토큰이 없는 경우 -> 토큰 발급
+            # 토큰이 없는 경우 → 토큰 발급
             tokens = self.get_first_token()
+
+        # kakao_code.json 유무와 상관없이 토큰 (Access, Refresh) 보유
+        msg_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+        headers = {
+            "Authorization": "Bearer " + tokens["access_token"]
+        }
+
+        msg_data = {
+            "template_object": json.dumps({
+                "object_type": "text",
+                "text": f"이름: {msg.name} \n메일: {msg.email} \n메세지: {msg.message}",
+                "link": {"mobile_web_url": "http://127.0.0.1:8000"} 
+            })
+        }
+        response = requests.post(msg_url, headers=headers, data=msg_data)
+
+        if response.json().get("result_code") == 0:
+            print("메세지를 성공적으로 보냈습니다.")
+        else:
+            print("메세지를 보내는데 실패했습니다. ERROR: " + str(response.json()))
         
         # 2. Access Token을 사용해서 나에게 카카오톡 보내기
 
@@ -96,4 +116,4 @@ class KakaoService:
         # + 스캐줄러 등록(Refresh Token 재발급)
         #   - Refresh Token은 유효기간 2달
         #   - 그리고 발급받은 날짜로부터 1달 후 재발급 가능
-        #   - 케쥴러 -> 1달에 한번씩 Refresh Token을 재발급 받으세요!
+        #   - 케쥴러 → 1달에 한번씩 Refresh Token을 재발급 받으세요!
