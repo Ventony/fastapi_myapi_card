@@ -112,8 +112,12 @@ class KakaoService:
         # 2. Access Token을 사용해서 나에게 카카오톡 보내기
 
         # 3. DB에 저장
+        create_message(msg, db)
 
         # + 스캐줄러 등록(Refresh Token 재발급)
         #   - Refresh Token은 유효기간 2달
         #   - 그리고 발급받은 날짜로부터 1달 후 재발급 가능
         #   - 케쥴러 → 1달에 한번씩 Refresh Token을 재발급 받으세요!
+
+
+        # def create_message 객체 생성해야함 (crud_message .py 파일 구현해야함)
