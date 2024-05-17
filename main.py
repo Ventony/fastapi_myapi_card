@@ -24,4 +24,4 @@ if __name__ == "__main__":
     sched = BackgroundScheduler()
     sched.add_job(KakaoService().refresh_access_token, "cron", day="1", hour="0", id="refresh_token")
     sched.start()
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
