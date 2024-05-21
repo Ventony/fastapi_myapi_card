@@ -6,3 +6,6 @@ dotenv
 pydantic[email]
 sqlalchemy
 apscheduler
+langchain
+langchain_openai
+langchain_community

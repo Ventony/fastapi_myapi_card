@@ -4,14 +4,16 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from backend.routes import kakao
+from backend.routes import kakao, chat
 from apscheduler.schedulers.background import BackgroundScheduler
 from backend.services.service_kakao import KakaoService
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates/")
 app.mount("/static", StaticFiles(directory="static"), name="static") #정적 값을 올림
 
 app.include_router(kakao.router, prefix="/kakao")
+app.include_router(chat.router, prefix="/chat")
 
 @app.get("/")       ## http://127.0.0.1:8000/
 async def welcome(request: Request):

@@ -347,10 +347,10 @@
     flex-direction: column;
     gap: 0.3rem;
 }
-.human_msg_box.chat_msg_date {
+.human_msg_box .chat_msg_date {
     text-align: right;
 }
-.human_msg_box.chat_msg_info {
+.human_msg_box .chat_msg_info {
     background-color: #f2e018;
 }
 .chat_msg_date {
@@ -375,7 +375,7 @@
     display: flex;
     height: 4rem;
 }
-.msg_inputinput {
+.msg_input input {
     width: 35rem;
     height: 4rem;
     border: none;
@@ -384,7 +384,7 @@
     color: #2F3138;
     padding-left: 1rem;
 }
-.msg_inputbutton {
+.msg_input button {
     width: 4rem;
     height: 4rem;
     border: none;
@@ -393,7 +393,7 @@
     cursor: pointer;
     color: #2F3138;
 }
-.msg_inputbutton:hover {
+.msg_input button:hover {
     color: #10A37F;
 }
 .msg_input>button>i {

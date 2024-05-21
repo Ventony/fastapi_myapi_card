@@ -176,6 +176,7 @@ function moveScroll () {
  
 
 function send_chat_server(txt) {
+    // 입력창 "" 시키기
     document.querySelector("#send_chat_input").value = "";
 
     // 사용자 챗(질문) 출력
