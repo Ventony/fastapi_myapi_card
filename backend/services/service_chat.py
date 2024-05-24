@@ -10,10 +10,15 @@ from langchain_community.vectorstores import Chroma
 from langchain.embeddings import CacheBackedEmbeddings
 from langchain.storage import LocalFileStore
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.schema.runnable import RunnablePassthrough
 
 _ = load_dotenv(find_dotenv())
 
-#
+# 1. 이력서(PDF) -> resume.pdf
+# 2. platform.openai.com -> api_key 가져오기!
+
+
+# LLM 모델 생성(api_key, default: gpt 3.5 turbo)
 llm = ChatOpenAI(
     api_key = os.getenv("OPENAI_API_KEY"),
     temperature= 0.1 # 얼마나 상상력을 풍부하게 하는지를 의미
@@ -25,7 +30,7 @@ llm = ChatOpenAI(
 # ConversationSummaryBufferMemory
 # -> 대화기록을 모두 저장하면 좋지만 비효율적
 # -> Max_token_limit까지는 모든 기록을 저장하고
-#   limit이 넘어가면 삭제하며 기록
+#   limit이 넘어가면 요약해서 기록
 memory = ConversationSummaryBufferMemory(
     llm= llm,
     max_token_limit= 120,
@@ -84,11 +89,34 @@ class ChatService:
         #  5. 메모리 불러오기
         def load_memory(_):
             return memory.load_memory_variables({})["chat_history"] 
+        
+        # 6. Chain 생성하기
+        chain = (
+            {
+                "context": retriever, # VectorDB로부터 질문과 유사한 값을 검색해서 가져옴
+                "question": RunnablePassthrough(), # 사용자 질문
+                "chat_history": load_memory # 대화기록
+            }
+            | promput
+            | llm
+        )
+        
+        # 7. Chain 실행하기
+        result = chain.invoke(question)
+
+        memory.save_context(
+            {"input": question},
+            {"output": result.content},
+        )
+
+        print(f">> ChatGPT: {result}")
+        return result.content # LLM 모델이 생성한 답변
 
 
     # 이력서 (resume.pdf) -> Vector DB에 저장        
     def gen_chroma_vector(self):
-        loader = PyPDFLoader("./static/downloads/Yeo_In_Hyeop.pdf")
+        # PDF 파일 불러오기
+        loader = PyPDFLoader("./static/download/Yeo_In_Hyeop.pdf")
 
         # Chunk(block) 단위로 Split (쪼개기)
         text_splitter = RecursiveCharacterTextSplitter(
