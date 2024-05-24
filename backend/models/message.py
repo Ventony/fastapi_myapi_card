@@ -3,6 +3,7 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 class Message(Base):
     __tablename__ = "tbl_message" #실제 테이블 명
 

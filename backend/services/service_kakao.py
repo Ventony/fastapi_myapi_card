@@ -1,6 +1,9 @@
 from backend.schemas.message import MessageDTO
 import os
 from dotenv import load_dotenv, find_dotenv
+from sqlalchemy.orm import Session
+from backend.schemas.message import BaseModel
+from backend.crud.crud_message import create_message
 import requests
 import json
 
@@ -11,7 +14,7 @@ redirect_uri = os.getenv("KAKAO_REDIRECT_URI")
 auth_code = "tsLfl_bFBHRCJHaVlw27_BwS0nj5fPBmp0PlhbfTIxuf7L92IXdrgdgQkVgKPXMXAAABj1EUEQ3-oZq-Jypvmw"
 
 class KakaoService:
-
+    '''
     # 카카오 토큰 발급받기(+인증코드)
     def get_first_token(self):
         data = {
@@ -70,12 +73,16 @@ class KakaoService:
         with open(r"./kakao_code.json", "w") as fp:
             json.dump(tokens, fp)
         return tokens
-
-
-
+        '''
+    # 카카오 토큰 발급받기 (+인증코드)
+    def get_first_token(self):
+        pass
+    # Access Token 재발급 (+Refresh Token)
+    def refresh_access_token(self):
+        pass
 
     # 나에게 카카오톡 보내기!
-    def send_message(self, msg: MessageDTO):
+    def send_message(self, msg: MessageDTO, db: Session):
         
         # 1. 토큰 유무 체크
         if os.path.isfile("./kakao_code.json"):
@@ -112,7 +119,7 @@ class KakaoService:
         # 2. Access Token을 사용해서 나에게 카카오톡 보내기
 
         # 3. DB에 저장
-        create_message(msg, db)
+        create_message(msg, db:Session)
 
         # + 스캐줄러 등록(Refresh Token 재발급)
         #   - Refresh Token은 유효기간 2달
