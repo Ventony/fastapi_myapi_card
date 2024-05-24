@@ -2,6 +2,10 @@ from fastapi import APIRouter
 from backend.schemas.message import MessageDTO
 from backend.services.service_kakao import KakaoService
 
+from fastapi import Depends
+from backend.db.session import get_db
+from sqlalchemy.orm import Session
+
 router = APIRouter(
     tags=["kakao"],
 )
